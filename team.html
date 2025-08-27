@@ -3,562 +3,716 @@
   <head>
     <title>Team - 1c3Gh3tt0</title>
     <meta property="og:title" content="Team - 1c3Gh3tt0" />
-    <meta
-      property="og:image"
-      content="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/de9bf073-78b1-476d-a930-8314e75547ee/bec9789d-4537-499f-b667-c5889391a9c6?org_if_sml=1&amp;force_format=original"
-    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
-    <meta property="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+      rel="shortcut icon"
+      href="images/iceghetto2.png"
+      type="icon/png"
+      sizes="32x32"
+    />
+    <style>
+      :root {
+        --primary-bg: #0a0a0f;
+        --secondary-bg: #1a1a2e;
+        --accent-bg: #16213e;
+        --card-bg: rgba(26, 26, 46, 0.8);
+        --primary-text: #ffffff;
+        --secondary-text: #a0a0b0;
+        --accent-color: #00d4ff;
+        --accent-hover: #00b8e6;
+        --success-color: #00ff88;
+        --danger-color: #ff4757;
+        --border-color: rgba(0, 212, 255, 0.2);
+        --shadow-glow: 0 0 30px rgba(0, 212, 255, 0.15);
+        --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.3);
+        --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #0066ff 100%);
+        --gradient-card: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.05) 100%);
+        --gradient-bg: radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                       radial-gradient(circle at 80% 20%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
+                       linear-gradient(180deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+      }
 
-    <style data-tag="reset-style-sheet">
-      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
-    </style>
-    <style data-tag="default-style-sheet">
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       html {
-        font-family: "Arial";
+        scroll-behavior: smooth;
         font-size: 16px;
       }
 
       body {
-        font-weight: 400;
-        font-style:normal;
-        text-decoration: none;
-        text-transform: none;
-        letter-spacing: normal;
-        line-height: 1.15;
-        color: var(--dl-color-theme-neutral-dark);
-        background: var(--dl-color-theme-neutral-light);
+        font-family: 'Inter', sans-serif;
+        background: var(--gradient-bg);
+        color: var(--primary-text);
+        line-height: 1.6;
+        overflow-x: hidden;
+        min-height: 100vh;
+      }
 
-        fill: var(--dl-color-theme-neutral-dark);
+      /* Animated background particles */
+      .bg-particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        opacity: 0.3;
+      }
+
+      .particle {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: var(--accent-color);
+        border-radius: 50%;
+        animation: float 15s infinite ease-in-out;
+      }
+
+      .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+      .particle:nth-child(2) { left: 20%; top: 80%; animation-delay: 2s; }
+      .particle:nth-child(3) { left: 30%; top: 40%; animation-delay: 4s; }
+      .particle:nth-child(4) { left: 70%; top: 10%; animation-delay: 6s; }
+      .particle:nth-child(5) { left: 80%; top: 70%; animation-delay: 8s; }
+      .particle:nth-child(6) { left: 90%; top: 30%; animation-delay: 10s; }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+        25% { transform: translateY(-20px) rotate(90deg); opacity: 1; }
+        50% { transform: translateY(-40px) rotate(180deg); opacity: 0.7; }
+        75% { transform: translateY(-20px) rotate(270deg); opacity: 1; }
+      }
+
+      /* Navigation */
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(10, 10, 15, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        height: 3rem;
+        filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+        transition: all 0.3s ease;
+      }
+
+      .logo:hover {
+        filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8));
+        transform: scale(1.05);
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        list-style: none;
+      }
+
+      .nav-link {
+        color: var(--secondary-text);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .nav-link.active {
+        color: var(--accent-color);
+      }
+
+      .nav-link::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--gradient-primary);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: var(--primary-text);
+        background: rgba(0, 212, 255, 0.1);
+      }
+
+      .nav-link:hover::before,
+      .nav-link.active::before {
+        width: 100%;
+      }
+
+      .social-icons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .social-icon {
+        color: var(--secondary-text);
+        transition: all 0.3s ease;
+        padding: 0.5rem;
+        border-radius: 8px;
+      }
+
+      .social-icon:hover {
+        color: var(--accent-color);
+        background: rgba(0, 212, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      /* Main content */
+      .main-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Team section */
+      .team-section {
+        padding: 6rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .section-title {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-align: center;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: glow 2s ease-in-out infinite alternate;
+      }
+
+      @keyframes glow {
+        from { text-shadow: 0 0 20px rgba(0, 212, 255, 0.5); }
+        to { text-shadow: 0 0 30px rgba(0, 212, 255, 0.8); }
+      }
+
+      .section-subtitle {
+        text-align: center;
+        color: var(--secondary-text);
+        font-size: 1.125rem;
+        margin-bottom: 4rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 6rem;
+      }
+
+      .team-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .team-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+        transition: left 0.5s;
+      }
+
+      .team-card:hover::before {
+        left: 100%;
+      }
+
+      .team-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-glow);
+        border-color: var(--accent-color);
+      }
+
+      .member-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1.5rem;
+        border: 3px solid var(--accent-color);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .team-card:hover .member-image {
+        box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+        transform: scale(1.05);
+      }
+
+      .member-name {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--primary-text);
+      }
+
+      .member-role {
+        color: var(--success-color);
+        font-weight: 500;
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+      }
+
+      .member-skills {
+        color: var(--secondary-text);
+        font-size: 0.875rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.5;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .social-link {
+        color: var(--secondary-text);
+        transition: all 0.3s ease;
+        padding: 0.5rem;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .social-link:hover {
+        color: var(--accent-color);
+        background: rgba(0, 212, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .social-link svg {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+      }
+
+      /* Hiring section */
+      .hiring-section {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 3rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hiring-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(from 0deg at 50% 50%, transparent, rgba(0, 212, 255, 0.1), transparent);
+        animation: rotate 10s linear infinite;
+        z-index: -1;
+      }
+
+      @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      .hiring-title {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hiring-text {
+        color: var(--secondary-text);
+        font-size: 1rem;
+        line-height: 1.6;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .hiring-text a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .hiring-text a:hover {
+        color: var(--accent-hover);
+      }
+
+      /* Footer */
+      .footer {
+        background: rgba(10, 10, 15, 0.8);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border-color);
+        padding: 2rem;
+        margin-top: auto;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .footer-social {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .footer-text {
+        color: var(--secondary-text);
+        font-size: 0.875rem;
+      }
+
+      /* Mobile burger menu */
+      .burger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+
+      .burger span {
+        width: 25px;
+        height: 3px;
+        background: var(--accent-color);
+        margin: 3px 0;
+        transition: 0.3s;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .nav-menu {
+          display: none;
+        }
+
+        .burger {
+          display: flex;
+        }
+
+        .team-section {
+          padding: 4rem 1rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .team-grid {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 1.5rem;
+        }
+
+        .hiring-section {
+          padding: 2rem;
+        }
+
+        .hiring-title {
+          font-size: 1.5rem;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .team-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .member-image {
+          width: 80px;
+          height: 80px;
+        }
+      }
+
+      /* Ensure max 4 members per row on larger screens */
+      @media (min-width: 1200px) {
+        .team-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      /* Scroll animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-in {
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--primary-bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--gradient-primary);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-hover);
       }
     </style>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/animate.css@4.1.1/animate.css"
-    />
-    <link
-      rel="shortcut icon"
-      href="public/iceghetto1.png"
-      type="icon/png"
-      sizes="32x32"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap"
-      data-tag="font"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
-      data-tag="font"
-    />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
-    />
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
-    <div>
-      <link href="./team.css" rel="stylesheet" />
+    <!-- Animated background particles -->
+    <div class="bg-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
 
-      <div class="team-container">
-        <navigation-bar-wrapper class="navigation-bar-wrapper">
-          <!--NavigationBar component-->
-          <header class="navigation-bar-container">
-            <header
-              data-thq="thq-navbar"
-              class="navigation-bar-navbar-interactive"
-            >
-              <a href="/website/index.html">
-                <img
-                  alt="Company Logo"
-                  src="public/iceghetto-1500h.png"
-                  class="navigation-bar-nav-bar-photo"
-                />
-              </a>
-              <div
-                data-thq="thq-navbar-nav"
-                class="navigation-bar-desktop-menu"
-              >
-                <nav class="navigation-bar-menu">
-                  <a href="index.html" class="navigation-bar-home-link1">
-                    <fragment class="team-fragment10">
-                      <span class="team-text10 thq-body-small thq-link">
-                        Home
-                      </span>
-                    </fragment>
-                  </a>
-                  <a href="schedule.html" class="navigation-bar-schedule-link1">
-                    <fragment class="team-fragment11">
-                      <span class="team-text11 thq-body-small thq-link">
-                        Schedule
-                      </span>
-                    </fragment>
-                  </a>
-                  <a href="writeups.html" class="navigation-bar-writeups-link1">
-                    <fragment class="team-fragment12">
-                      <span class="team-text12 thq-body-small thq-link">
-                        Writeups
-                      </span>
-                    </fragment>
-                  </a>
-                  <a href="team.html" class="navigation-bar-team-link1">
-                    <fragment class="team-fragment13">
-                      <span class="team-text13 thq-body-small thq-link">
-                        <span>Team</span>
-                        <br />
-                      </span>
-                    </fragment>
-                  </a>
-                </nav>
-                <div class="navigation-bar-icons1">
-                  <!-- Link For Twitter -->
-                  <a
-                    href="https://x.com/1c3Gh3tt0"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="navigation-bar-link1"
-                  >
-                    <svg
-                      viewBox="0 0 950.8571428571428 1024"
-                      class="navigation-bar-icon thq-icon-small"
-                    >
-                      <path
-                        d="M925.714 233.143c-25.143 36.571-56.571 69.143-92.571 95.429 0.571 8 0.571 16 0.571 24 0 244-185.714 525.143-525.143 525.143-104.571 0-201.714-30.286-283.429-82.857 14.857 1.714 29.143 2.286 44.571 2.286 86.286 0 165.714-29.143 229.143-78.857-81.143-1.714-149.143-54.857-172.571-128 11.429 1.714 22.857 2.857 34.857 2.857 16.571 0 33.143-2.286 48.571-6.286-84.571-17.143-148-91.429-148-181.143v-2.286c24.571 13.714 53.143 22.286 83.429 23.429-49.714-33.143-82.286-89.714-82.286-153.714 0-34.286 9.143-65.714 25.143-93.143 90.857 112 227.429 185.143 380.571 193.143-2.857-13.714-4.571-28-4.571-42.286 0-101.714 82.286-184.571 184.571-184.571 53.143 0 101.143 22.286 134.857 58.286 41.714-8 81.714-23.429 117.143-44.571-13.714 42.857-42.857 78.857-81.143 101.714 37.143-4 73.143-14.286 106.286-28.571z"
-                      ></path>
-                    </svg>
-                  </a>
-                  <!-- Link For CTFTime -->
-                  <a
-                    href="https://ctftime.org/team/299748" 
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="navigation-bar-link2"
-                  >
-                    <svg 
-                      class="navigation-bar-icon thq-icon-small"
-                      width="24" height="24"
-                    >
-                    <path d="M13.09 3.294c1.924.95 3.422 1.69 5.472.692a1 1 0 0 1 1.438.9v9.54a1 1 0 0 1-.562.9c-2.981 1.45-5.382.24-7.25-.701a38.739 38.739 0 0 0-.622-.31c-1.033-.497-1.887-.812-2.756-.77-.76.036-1.672.357-2.81 1.396V21a1 1 0 1 1-2 0V4.971a1 1 0 0 1 .297-.71c1.522-1.506 2.967-2.185 4.417-2.255 1.407-.068 2.653.453 3.72.967.225.108.443.216.655.32Z"/>
-                  </svg>
-                  </a>
-                </div>
-              </div>
-              <div
-                data-thq="thq-burger-menu"
-                class="navigation-bar-burger-menu"
-              >
-                <svg viewBox="0 0 1024 1024" class="navigation-bar-icon14">
-                  <path
-                    d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
-                  ></path>
+    <div class="main-container">
+      <!-- Navigation -->
+      <nav class="navbar">
+        <div class="nav-container">
+          <img src="images/iceghetto2.png" alt="1c3Gh3tt0 Logo" class="logo" />
+          
+          <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="schedule.html" class="nav-link">Schedule</a></li>
+            <li><a href="writeups.html" class="nav-link">Writeups</a></li>
+            <li><a href="team.html" class="nav-link active">Team</a></li>
+          </ul>
+
+          <div class="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Team Section -->
+      <section class="team-section animate-in">
+        <h1 class="section-title">1c3Gh3tt0 Team</h1>
+        
+        <div class="team-grid">
+          <!-- Juke Card -->
+          <div class="team-card">
+            <img src="images/juke.png" alt="Juke" class="member-image" />
+            <h3 class="member-name">Juke</h3>
+            <p class="member-role">Founder</p>
+            <p class="member-skills">Forensics, Misc, Steganography, Reverse</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/ioannis-alexopoulos-juke/" class="social-link">
+                <svg viewBox="0 0 877.7142857142857 1024">
+                  <path d="M135.429 808h132v-396.571h-132v396.571zM276 289.143c-0.571-38.857-28.571-68.571-73.714-68.571s-74.857 29.714-74.857 68.571c0 37.714 28.571 68.571 73.143 68.571h0.571c46.286 0 74.857-30.857 74.857-68.571zM610.286 808h132v-227.429c0-121.714-65.143-178.286-152-178.286-70.857 0-102.286 39.429-119.429 66.857h1.143v-57.714h-132s1.714 37.143 0 396.571v0h132v-221.714c0-11.429 0.571-23.429 4-32 9.714-23.429 31.429-48 68-48 47.429 0 66.286 36 66.286 89.714v212zM877.714 237.714v548.571c0 90.857-73.714 164.571-164.571 164.571h-548.571c-90.857 0-164.571-73.714-164.571-164.571v-548.571c0-90.857 73.714-164.571 164.571-164.571h548.571c90.857 0 164.571 73.714 164.571 164.571z"></path>
                 </svg>
-              </div>
-              <div
-                data-thq="thq-mobile-menu"
-                class="navigation-bar-mobile-menu"
-              >
-                <div class="navigation-bar-nav">
-                  <div class="navigation-bar-top">
-                    <img
-                      alt="1c3Gh3tt0 Logo"
-                      src="public/iceghetto-1500h.png"
-                      class="navigation-bar-photo"
-                    />
-                    <div
-                      data-thq="thq-close-menu"
-                      class="navigation-bar-close-menu"
-                    >
-                      <svg
-                        viewBox="0 0 1024 1024"
-                        class="navigation-bar-icon16"
-                      >
-                        <path
-                          d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
-                        ></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <nav class="navigation-bar-links">
-                    <a href="index.html" class="navigation-bar-home-link2">
-                      <fragment class="team-fragment10">
-                        <span class="team-text10 thq-body-small thq-link">
-                          Home
-                        </span>
-                      </fragment>
-                    </a>
-                    <a
-                      href="schedule.html"
-                      class="navigation-bar-schedule-link2"
-                    >
-                      <fragment class="team-fragment11">
-                        <span class="team-text11 thq-body-small thq-link">
-                          Schedule
-                        </span>
-                      </fragment>
-                    </a>
-                    <a
-                      href="writeups.html"
-                      class="navigation-bar-writeups-link2"
-                    >
-                      <fragment class="team-fragment12">
-                        <span class="team-text12 thq-body-small thq-link">
-                          Writeups
-                        </span>
-                      </fragment>
-                    </a>
-                    <a href="team.html" class="navigation-bar-team-link2">
-                      <fragment class="team-fragment13">
-                        <span class="team-text13 thq-body-small thq-link">
-                          <span>Team</span>
-                          <br />
-                        </span>
-                      </fragment>
-                    </a>
-                  </nav>
-                </div>
-                <div class="navigation-bar-icons2">
-                  <!-- Link For Twitter -->
-                  <a
-                    href="https://x.com/1c3Gh3tt0"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="navigation-bar-link1"
-                  >
-                    <svg
-                      viewBox="0 0 950.8571428571428 1024"
-                      class="navigation-bar-icon thq-icon-small"
-                    >
-                      <path
-                        d="M925.714 233.143c-25.143 36.571-56.571 69.143-92.571 95.429 0.571 8 0.571 16 0.571 24 0 244-185.714 525.143-525.143 525.143-104.571 0-201.714-30.286-283.429-82.857 14.857 1.714 29.143 2.286 44.571 2.286 86.286 0 165.714-29.143 229.143-78.857-81.143-1.714-149.143-54.857-172.571-128 11.429 1.714 22.857 2.857 34.857 2.857 16.571 0 33.143-2.286 48.571-6.286-84.571-17.143-148-91.429-148-181.143v-2.286c24.571 13.714 53.143 22.286 83.429 23.429-49.714-33.143-82.286-89.714-82.286-153.714 0-34.286 9.143-65.714 25.143-93.143 90.857 112 227.429 185.143 380.571 193.143-2.857-13.714-4.571-28-4.571-42.286 0-101.714 82.286-184.571 184.571-184.571 53.143 0 101.143 22.286 134.857 58.286 41.714-8 81.714-23.429 117.143-44.571-13.714 42.857-42.857 78.857-81.143 101.714 37.143-4 73.143-14.286 106.286-28.571z"
-                      ></path>
-                    </svg>
-                  </a>
-                  <!-- Link For CTFTime -->
-                  <a
-                    href="https://ctftime.org/team/299748" 
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="navigation-bar-link2"
-                  >
-                    <svg 
-                      class="navigation-bar-icon thq-icon-small"
-                      width="24" height="24"
-                    >
-                    <path d="M13.09 3.294c1.924.95 3.422 1.69 5.472.692a1 1 0 0 1 1.438.9v9.54a1 1 0 0 1-.562.9c-2.981 1.45-5.382.24-7.25-.701a38.739 38.739 0 0 0-.622-.31c-1.033-.497-1.887-.812-2.756-.77-.76.036-1.672.357-2.81 1.396V21a1 1 0 1 1-2 0V4.971a1 1 0 0 1 .297-.71c1.522-1.506 2.967-2.185 4.417-2.255 1.407-.068 2.653.453 3.72.967.225.108.443.216.655.32Z"/>
-                  </svg>
-                  </a>
-                </div>
-              </div>
-            </header>
-          </header>
-        </navigation-bar-wrapper>
-
-        <team-members-information-wrapper class="team-members-information-wrapper">
-          <!--TeamMembersInformation component-->
-          <div class="thq-section-padding">
-            <div class="team-members-information-max-width thq-section-max-width">
-              <div class="team-members-information-team-title">
-                <div class="team-members-information-content1">
-                  <h2>
-                    <fragment class="team-fragment19">
-                      <span class="team-text24 thq-heading-2">
-                        1c3Gh3tt0 team
-                      </span>
-                    </fragment>
-                  </h2>
-                </div>
-              </div>
-              <div class="team-members-information-content2">
-                <div class="team-members-information-people">
-                  <!-- ROW STARTS HERE -->
-                  <div class="team-members-information-row">
-                    <div class="team-members-information-container1">
-                      <!-- 1st Card -->
-                      <div class="team-members-information-card1">
-                        <img
-                          alt="Photo"
-                          src="public/juke-500w.png"
-                          class="team-members-information-placeholder-image1 thq-img-ratio-1-1 thq-img-round"
-                        />
-                        <div class="team-members-information-content3">
-                          <div class="team-members-information-title1">
-                            <span>
-                              <fragment class="team-fragment14">
-                                <span class="team-text16 thq-body-small">
-                                  Juke
-                                </span>
-                              </fragment>
-                            </span>
-                            <span>
-                              <fragment class="team-fragment21">
-                                <span class="team-text26 thq-body-small">
-                                  Founder
-                                </span>
-                              </fragment>
-                            </span>
-                          </div>
-                          <span>
-                            <fragment class="team-fragment25">
-                              <span class="team-text30 thq-body-small">
-                                Forensics, Misc, Steganography, Reverse
-                              </span>
-                            </fragment>
-                          </span>
-                        </div>
-                        <div class="team-members-information-social-icons1">
-                          <!-- Link For LinkedIn Button -->
-                          <a href="https://www.linkedin.com/in/ioannis-alexopoulos-juke/" class="team-members-information-link10">
-                            <svg viewBox="0 0 877.7142857142857 1024" class="team-members-information-icon10 thq-icon-small">
-                              <path
-                                d="M135.429 808h132v-396.571h-132v396.571zM276 289.143c-0.571-38.857-28.571-68.571-73.714-68.571s-74.857 29.714-74.857 68.571c0 37.714 28.571 68.571 73.143 68.571h0.571c46.286 0 74.857-30.857 74.857-68.571zM610.286 808h132v-227.429c0-121.714-65.143-178.286-152-178.286-70.857 0-102.286 39.429-119.429 66.857h1.143v-57.714h-132s1.714 37.143 0 396.571v0h132v-221.714c0-11.429 0.571-23.429 4-32 9.714-23.429 31.429-48 68-48 47.429 0 66.286 36 66.286 89.714v212zM877.714 237.714v548.571c0 90.857-73.714 164.571-164.571 164.571h-548.571c-90.857 0-164.571-73.714-164.571-164.571v-548.571c0-90.857 73.714-164.571 164.571-164.571h548.571c90.857 0 164.571 73.714 164.571 164.571z"
-                              ></path>
-                            </svg>
-                          </a>
-                          <!-- Link For Twitter Button -->
-                          <a href="https://x.com/giannisalex09" class="team-members-information-link11">
-                            <svg viewBox="0 0 950.8571428571428 1024" class="team-members-information-icon12 thq-icon-small">
-                              <path
-                                d="M925.714 233.143c-25.143 36.571-56.571 69.143-92.571 95.429 0.571 8 0.571 16 0.571 24 0 244-185.714 525.143-525.143 525.143-104.571 0-201.714-30.286-283.429-82.857 14.857 1.714 29.143 2.286 44.571 2.286 86.286 0 165.714-29.143 229.143-78.857-81.143-1.714-149.143-54.857-172.571-128 11.429 1.714 22.857 2.857 34.857 2.857 16.571 0 33.143-2.286 48.571-6.286-84.571-17.143-148-91.429-148-181.143v-2.286c24.571 13.714 53.143 22.286 83.429 23.429-49.714-33.143-82.286-89.714-82.286-153.714 0-34.286 9.143-65.714 25.143-93.143 90.857 112 227.429 185.143 380.571 193.143-2.857-13.714-4.571-28-4.571-42.286 0-101.714 82.286-184.571 184.571-184.571 53.143 0 101.143 22.286 134.857 58.286 41.714-8 81.714-23.429 117.143-44.571-13.714 42.857-42.857 78.857-81.143 101.714 37.143-4 73.143-14.286 106.286-28.571z"
-                              ></path>
-                            </svg>
-                          </a>
-                          <!-- Link For Instagram Button -->
-                          <a href="https://www.instagram.com/giannisalex.09/" class="team-members-information-link12">
-                            <svg viewBox="0 0 877.7142857142857 1024" class="team-members-information-icon14 thq-icon-small">
-                              <path
-                                d="M585.143 512c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286 65.714 146.286 146.286 146.286 146.286-65.714 146.286-146.286zM664 512c0 124.571-100.571 225.143-225.143 225.143s-225.143-100.571-225.143-225.143 100.571-225.143 225.143-225.143 225.143 100.571 225.143 225.143zM725.714 277.714c0 29.143-23.429 52.571-52.571 52.571s-52.571-23.429-52.571-52.571 23.429-52.571 52.571-52.571 52.571 23.429 52.571 52.571zM438.857 152c-64 0-201.143-5.143-258.857 17.714-20 8-34.857 17.714-50.286 33.143s-25.143 30.286-33.143 50.286c-22.857 57.714-17.714 194.857-17.714 258.857s-5.143 201.143 17.714 258.857c8 20 17.714 34.857 33.143 50.286s30.286 25.143 50.286 33.143c57.714 22.857 194.857 17.714 258.857 17.714s201.143 5.143 258.857-17.714c20-8 34.857-17.714 50.286-33.143s25.143-30.286 33.143-50.286c22.857-57.714 17.714-194.857 17.714-258.857s5.143-201.143-17.714-258.857c-8-20-17.714-34.857-33.143-50.286s-30.286-25.143-50.286-33.143c-57.714-22.857-194.857-17.714-258.857-17.714zM877.714 512c0 60.571 0.571 120.571-2.857 181.143-3.429 70.286-19.429 132.571-70.857 184s-113.714 67.429-184 70.857c-60.571 3.429-120.571 2.857-181.143 2.857s-120.571 0.571-181.143-2.857c-70.286-3.429-132.571-19.429-184-70.857s-67.429-113.714-70.857-184c-3.429-60.571-2.857-120.571-2.857-181.143s-0.571-120.571 2.857-181.143c3.429-70.286 19.429-132.571 70.857-184s113.714-67.429 184-70.857c60.571-3.429 120.571-2.857 181.143-2.857s120.571-0.571 181.143 2.857c70.286 3.429 132.571 19.429 184 70.857s67.429 113.714 70.857 184c3.429 60.571 2.857 120.571 2.857 181.143z"
-                              ></path>
-                            </svg>
-                          </a>
-                          <!-- Link For Github Button -->
-                          <a href="https://github.com/juke-33" class="team-members-information-link12">
-                            <svg class="team-members-information-icon thq-icon-small"width="24" height="24">
-                              <path fill-rule="evenodd" d="M12.006 2a9.847 9.847 0 0 0-6.484 2.44 10.32 10.32 0 0 0-3.393 6.17 10.48 10.48 0 0 0 1.317 6.955 10.045 10.045 0 0 0 5.4 4.418c.504.095.683-.223.683-.494 0-.245-.01-1.052-.014-1.908-2.78.62-3.366-1.21-3.366-1.21a2.711 2.711 0 0 0-1.11-1.5c-.907-.637.07-.621.07-.621.317.044.62.163.885.346.266.183.487.426.647.71.135.253.318.476.538.655a2.079 2.079 0 0 0 2.37.196c.045-.52.27-1.006.635-1.37-2.219-.259-4.554-1.138-4.554-5.07a4.022 4.022 0 0 1 1.031-2.75 3.77 3.77 0 0 1 .096-2.713s.839-.275 2.749 1.05a9.26 9.26 0 0 1 5.004 0c1.906-1.325 2.74-1.05 2.74-1.05.37.858.406 1.828.101 2.713a4.017 4.017 0 0 1 1.029 2.75c0 3.939-2.339 4.805-4.564 5.058a2.471 2.471 0 0 1 .679 1.897c0 1.372-.012 2.477-.012 2.814 0 .272.18.592.687.492a10.05 10.05 0 0 0 5.388-4.421 10.473 10.473 0 0 0 1.313-6.948 10.32 10.32 0 0 0-3.39-6.165A9.847 9.847 0 0 0 12.007 2Z" clip-rule="evenodd"/>
-                            </svg>                          
-                          </a>
-                          <!-- Link For Discord Button -->
-                          <a href="https://discord.com/users/515926967573413908" class="team-members-information-link12">
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" width="24" height="24">
-                              <path d="M18.942 5.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.586 11.586 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3 17.392 17.392 0 0 0-2.868 11.662 15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.638 10.638 0 0 1-1.706-.83c.143-.106.283-.217.418-.331a11.664 11.664 0 0 0 10.118 0c.137.114.277.225.418.331-.544.328-1.116.606-1.71.832a12.58 12.58 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM8.678 14.813a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.929 1.929 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"/>
-                            </svg>                                                      
-                          </a>
-                        </div>
-                      </div>
-                      <!-- 2nd Card -->
-                      <div class="team-members-information-card2">
-                        <img
-                          alt="Photo"
-                          src="public/obsessed.png"
-                          class="team-members-information-placeholder-image2 thq-img-ratio-1-1 thq-img-round"
-                        />
-                        <div class="team-members-information-content4">
-                          <div class="team-members-information-title2">
-                            <span>
-                              <fragment class="team-fragment15">
-                                <span class="team-text17 thq-body-small">
-                                  obsessed
-                                </span>
-                              </fragment>
-                            </span>
-                            <span>
-                              <fragment class="team-fragment22">
-                                <span class="team-text27 thq-body-small">
-                                  Member
-                                </span>
-                              </fragment>
-                            </span>
-                          </div>
-                          <span>
-                            <fragment class="team-fragment26">
-                              <span class="team-text31 thq-body-small">
-                                Cryptography, Web, OSINT
-                              </span>
-                            </fragment>
-                          </span>
-                        </div>
-                        <div class="team-members-information-social-icons1">
-                          <!-- Link For Instagram Button -->
-                          <a href="https://www.instagram.com/kwnstantinos_pallikaris/" class="team-members-information-link12">
-                            <svg viewBox="0 0 877.7142857142857 1024" class="team-members-information-icon14 thq-icon-small">
-                              <path
-                                d="M585.143 512c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286 65.714 146.286 146.286 146.286 146.286-65.714 146.286-146.286zM664 512c0 124.571-100.571 225.143-225.143 225.143s-225.143-100.571-225.143-225.143 100.571-225.143 225.143-225.143 225.143 100.571 225.143 225.143zM725.714 277.714c0 29.143-23.429 52.571-52.571 52.571s-52.571-23.429-52.571-52.571 23.429-52.571 52.571-52.571 52.571 23.429 52.571 52.571zM438.857 152c-64 0-201.143-5.143-258.857 17.714-20 8-34.857 17.714-50.286 33.143s-25.143 30.286-33.143 50.286c-22.857 57.714-17.714 194.857-17.714 258.857s-5.143 201.143 17.714 258.857c8 20 17.714 34.857 33.143 50.286s30.286 25.143 50.286 33.143c57.714 22.857 194.857 17.714 258.857 17.714s201.143 5.143 258.857-17.714c20-8 34.857-17.714 50.286-33.143s25.143-30.286 33.143-50.286c22.857-57.714 17.714-194.857 17.714-258.857s5.143-201.143-17.714-258.857c-8-20-17.714-34.857-33.143-50.286s-30.286-25.143-50.286-33.143c-57.714-22.857-194.857-17.714-258.857-17.714zM877.714 512c0 60.571 0.571 120.571-2.857 181.143-3.429 70.286-19.429 132.571-70.857 184s-113.714 67.429-184 70.857c-60.571 3.429-120.571 2.857-181.143 2.857s-120.571 0.571-181.143-2.857c-70.286-3.429-132.571-19.429-184-70.857s-67.429-113.714-70.857-184c-3.429-60.571-2.857-120.571-2.857-181.143s-0.571-120.571 2.857-181.143c3.429-70.286 19.429-132.571 70.857-184s113.714-67.429 184-70.857c60.571-3.429 120.571-2.857 181.143-2.857s120.571-0.571 181.143 2.857c70.286 3.429 132.571 19.429 184 70.857s67.429 113.714 70.857 184c3.429 60.571 2.857 120.571 2.857 181.143z"
-                              ></path>
-                            </svg>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="team-members-information-container2">
-                      <!-- 3rd Card -->
-                      <div class="team-members-information-card1">
-                        <img
-                          alt="Photo"
-                          src="public/ap01lo.png"
-                          class="team-members-information-placeholder-image1 thq-img-ratio-1-1 thq-img-round"
-                        />
-                        <div class="team-members-information-content3">
-                          <div class="team-members-information-title1">
-                            <span>
-                              <fragment class="team-fragment14">
-                                <span class="team-text16 thq-body-small">
-                                  ap01lo
-                                </span>
-                              </fragment>
-                            </span>
-                            <span>
-                              <fragment class="team-fragment21">
-                                <span class="team-text26 thq-body-small">
-                                  Member
-                                </span>
-                              </fragment>
-                            </span>
-                          </div>
-                          <span>
-                            <fragment class="team-fragment25">
-                              <span class="team-text30 thq-body-small">
-                                Pwn, Reverse, Web
-                              </span>
-                            </fragment>
-                          </span>
-                        </div>
-                        <div class="team-members-information-social-icons1">
-                          <!-- Link For Github Button -->
-                          <a href="https://github.com/ap0llo19" class="team-members-information-link12">
-                            <svg class="team-members-information-icon thq-icon-small"width="24" height="24">
-                              <path fill-rule="evenodd" d="M12.006 2a9.847 9.847 0 0 0-6.484 2.44 10.32 10.32 0 0 0-3.393 6.17 10.48 10.48 0 0 0 1.317 6.955 10.045 10.045 0 0 0 5.4 4.418c.504.095.683-.223.683-.494 0-.245-.01-1.052-.014-1.908-2.78.62-3.366-1.21-3.366-1.21a2.711 2.711 0 0 0-1.11-1.5c-.907-.637.07-.621.07-.621.317.044.62.163.885.346.266.183.487.426.647.71.135.253.318.476.538.655a2.079 2.079 0 0 0 2.37.196c.045-.52.27-1.006.635-1.37-2.219-.259-4.554-1.138-4.554-5.07a4.022 4.022 0 0 1 1.031-2.75 3.77 3.77 0 0 1 .096-2.713s.839-.275 2.749 1.05a9.26 9.26 0 0 1 5.004 0c1.906-1.325 2.74-1.05 2.74-1.05.37.858.406 1.828.101 2.713a4.017 4.017 0 0 1 1.029 2.75c0 3.939-2.339 4.805-4.564 5.058a2.471 2.471 0 0 1 .679 1.897c0 1.372-.012 2.477-.012 2.814 0 .272.18.592.687.492a10.05 10.05 0 0 0 5.388-4.421 10.473 10.473 0 0 0 1.313-6.948 10.32 10.32 0 0 0-3.39-6.165A9.847 9.847 0 0 0 12.007 2Z" clip-rule="evenodd"/>
-                            </svg>                          
-                          </a>
-                        </div>
-                      </div>
-                      <!-- 4th Card -->
-                      <div class="team-members-information-card2">
-                        <img
-                          alt="Photo"
-                          src="public/george.png"
-                          class="team-members-information-placeholder-image2 thq-img-ratio-1-1 thq-img-round"
-                        />
-                        <div class="team-members-information-content4">
-                          <div class="team-members-information-title2">
-                            <span>
-                              <fragment class="team-fragment15">
-                                <span class="team-text17 thq-body-small">
-                                  George
-                                </span>
-                              </fragment>
-                            </span>
-                            <span>
-                              <fragment class="team-fragment22">
-                                <span class="team-text27 thq-body-small">
-                                  Member
-                                </span>
-                              </fragment>
-                            </span>
-                          </div>
-                          <span>
-                            <fragment class="team-fragment26">
-                              <span class="team-text31 thq-body-small">
-                                Web
-                              </span>
-                            </fragment>
-                          </span>
-                        </div>
-                        
-                      </div>
-                    </div>
-                  </div>
-                  <!-- ROW ENDS HERE -->
-                </div>
-                <!-- WE ARE HIRING CONTENT -->
-                <div class="team-members-information-hiring">
-                  <div class="team-members-information-content7">
-                    <h2>
-                      <fragment class="team-fragment20">
-                        <span class="team-text25 thq-heading-2">
-                          We are looking for new members!
-                        </span>
-                      </fragment>
-                    </h2>
-                    <span>
-                      <fragment class="team-fragment18">
-                        <span class="team-text20 thq-body-small">
-                          <span>
-                            If you enjoy playing ctfs and want to join our
-                            team, please send an email to us including some
-                            information about you here:
-                          </span>
-                          <a
-                            href="mailto:1c3gh3tt0@gmail.com?subject=CTF TEAM JOIN REQUEST"
-                          >
-                            1c3gh3tt0@gmail.com
-                          </a>
-                          <span>
-                            . Let's participate in various CTFs and grow our
-                            knowledge on CyberSecurity together!
-                          </span>
-                          <br />
-                        </span>
-                      </fragment>
-                    </span>
-                  </div>
-                </div>
-              </div>
+              </a>
+              <a href="https://x.com/giannisalex09" class="social-link">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/giannisalex.09/" class="social-link">
+                <svg viewBox="0 0 877.7142857142857 1024">
+                  <path d="M585.143 512c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286 65.714 146.286 146.286 146.286 146.286-65.714 146.286-146.286zM664 512c0 124.571-100.571 225.143-225.143 225.143s-225.143-100.571-225.143-225.143 100.571-225.143 225.143-225.143 225.143 100.571 225.143 225.143zM725.714 277.714c0 29.143-23.429 52.571-52.571 52.571s-52.571-23.429-52.571-52.571 23.429-52.571 52.571-52.571 52.571 23.429 52.571 52.571zM438.857 152c-64 0-201.143-5.143-258.857 17.714-20 8-34.857 17.714-50.286 33.143s-25.143 30.286-33.143 50.286c-22.857 57.714-17.714 194.857-17.714 258.857s-5.143 201.143 17.714 258.857c8 20 17.714 34.857 33.143 50.286s30.286 25.143 50.286 33.143c57.714 22.857 194.857 17.714 258.857 17.714s201.143 5.143 258.857-17.714c20-8 34.857-17.714 50.286-33.143s25.143-30.286 33.143-50.286c22.857-57.714 17.714-194.857 17.714-258.857s5.143-201.143-17.714-258.857c-8-20-17.714-34.857-33.143-50.286s-30.286-25.143-50.286-33.143c-57.714-22.857-194.857-17.714-258.857-17.714zM877.714 512c0 60.571 0.571 120.571-2.857 181.143-3.429 70.286-19.429 132.571-70.857 184s-113.714 67.429-184 70.857c-60.571 3.429-120.571 2.857-181.143 2.857s-120.571 0.571-181.143-2.857c-70.286-3.429-132.571-19.429-184-70.857s-67.429-113.714-70.857-184c-3.429-60.571-2.857-120.571-2.857-181.143s-0.571-120.571 2.857-181.143c3.429-70.286 19.429-132.571 70.857-184s113.714-67.429 184-70.857c60.571-3.429 120.571-2.857 181.143-2.857s120.571-0.571 181.143 2.857c70.286 3.429 132.571 19.429 184 70.857s67.429 113.714 70.857 184c3.429 60.571 2.857 120.571 2.857 181.143z"></path>
+                </svg>
+              </a>
+              <a href="https://github.com/juke-33" class="social-link">
+                <svg viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" d="M12.006 2a9.847 9.847 0 0 0-6.484 2.44 10.32 10.32 0 0 0-3.393 6.17 10.48 10.48 0 0 0 1.317 6.955 10.045 10.045 0 0 0 5.4 4.418c.504.095.683-.223.683-.494 0-.245-.01-1.052-.014-1.908-2.78.62-3.366-1.21-3.366-1.21a2.711 2.711 0 0 0-1.11-1.5c-.907-.637.07-.621.07-.621.317.044.62.163.885.346.266.183.487.426.647.71.135.253.318.476.538.655a2.079 2.079 0 0 0 2.37.196c.045-.52.27-1.006.635-1.37-2.219-.259-4.554-1.138-4.554-5.07a4.022 4.022 0 0 1 1.031-2.75 3.77 3.77 0 0 1 .096-2.713s.839-.275 2.749 1.05a9.26 9.26 0 0 1 5.004 0c1.906-1.325 2.74-1.05 2.74-1.05.37.858.406 1.828.101 2.713a4.017 4.017 0 0 1 1.029 2.75c0 3.939-2.339 4.805-4.564 5.058a2.471 2.471 0 0 1 .679 1.897c0 1.372-.012 2.477-.012 2.814 0 .272.18.592.687.492a10.05 10.05 0 0 0 5.388-4.421 10.473 10.473 0 0 0 1.313-6.948 10.32 10.32 0 0 0-3.39-6.165A9.847 9.847 0 0 0 12.007 2Z" clip-rule="evenodd"/>
+                </svg>
+              </a>
+              <a href="https://discord.com/users/515926967573413908" class="social-link">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18.942 5.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.586 11.586 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3 17.392 17.392 0 0 0-2.868 11.662 15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.638 10.638 0 0 1-1.706-.83c.143-.106.283-.217.418-.331a11.664 11.664 0 0 0 10.118 0c.137.114.277.225.418.331-.544.328-1.116.606-1.71.832a12.58 12.58 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM8.678 14.813a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.929 1.929 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"/>
+                </svg>
+              </a>
             </div>
           </div>
-        </team-members-information-wrapper>
 
-        <footer-wrapper class="footer-wrapper">
-          <!--Footer component-->
-          <footer class="footer-container thq-section-padding footer">
-            <div class="footer-max-width thq-section-max-width">
-              <div class="thq-divider-horizontal"></div>
-              <div class="footer-credits">
-                <div class="footer-social-links">
-                  <!-- Link For Twitter -->
-                  <a
-                    href="https://x.com/1c3Gh3tt0"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="footer-icon1"
-                  >
-                    <svg
-                      viewBox="0 0 950.8571428571428 1024"
-                      class="footer-icon thq-icon-small"
-                    >
-                      <path
-                        d="M925.714 233.143c-25.143 36.571-56.571 69.143-92.571 95.429 0.571 8 0.571 16 0.571 24 0 244-185.714 525.143-525.143 525.143-104.571 0-201.714-30.286-283.429-82.857 14.857 1.714 29.143 2.286 44.571 2.286 86.286 0 165.714-29.143 229.143-78.857-81.143-1.714-149.143-54.857-172.571-128 11.429 1.714 22.857 2.857 34.857 2.857 16.571 0 33.143-2.286 48.571-6.286-84.571-17.143-148-91.429-148-181.143v-2.286c24.571 13.714 53.143 22.286 83.429 23.429-49.714-33.143-82.286-89.714-82.286-153.714 0-34.286 9.143-65.714 25.143-93.143 90.857 112 227.429 185.143 380.571 193.143-2.857-13.714-4.571-28-4.571-42.286 0-101.714 82.286-184.571 184.571-184.571 53.143 0 101.143 22.286 134.857 58.286 41.714-8 81.714-23.429 117.143-44.571-13.714 42.857-42.857 78.857-81.143 101.714 37.143-4 73.143-14.286 106.286-28.571z"
-                      ></path>
-                    </svg>
-                  </a>
-                  <!-- Link For CTFTime -->
-                  <a
-                    href="https://ctftime.org/team/299748" 
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="footer-icon2"
-                  >
-                    <svg 
-                      class="footer-icon thq-icon-small"
-                      width="24" height="24"
-                    >
-                    <path d="M13.09 3.294c1.924.95 3.422 1.69 5.472.692a1 1 0 0 1 1.438.9v9.54a1 1 0 0 1-.562.9c-2.981 1.45-5.382.24-7.25-.701a38.739 38.739 0 0 0-.622-.31c-1.033-.497-1.887-.812-2.756-.77-.76.036-1.672.357-2.81 1.396V21a1 1 0 1 1-2 0V4.971a1 1 0 0 1 .297-.71c1.522-1.506 2.967-2.185 4.417-2.255 1.407-.068 2.653.453 3.72.967.225.108.443.216.655.32Z"/>
-                  </svg>
-                  </a>
-                </div>
-                <span class="team-text34 thq-body-small">
-                  © 2025 1c3Gh3tt0
-                </span>
-              </div>
+          <!-- obsessed Card -->
+          <div class="team-card">
+            <img src="images/obsessed.png" alt="obsessed" class="member-image" />
+            <h3 class="member-name">obsessed</h3>
+            <p class="member-role">Member</p>
+            <p class="member-skills">Cryptography, Web, OSINT</p>
+            <div class="social-links">
+              <a href="https://www.instagram.com/kwnstantinos_pallikaris/" class="social-link">
+                <svg viewBox="0 0 877.7142857142857 1024">
+                  <path d="M585.143 512c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286 65.714 146.286 146.286 146.286 146.286-65.714 146.286-146.286zM664 512c0 124.571-100.571 225.143-225.143 225.143s-225.143-100.571-225.143-225.143 100.571-225.143 225.143-225.143 225.143 100.571 225.143 225.143zM725.714 277.714c0 29.143-23.429 52.571-52.571 52.571s-52.571-23.429-52.571-52.571 23.429-52.571 52.571-52.571 52.571 23.429 52.571 52.571zM438.857 152c-64 0-201.143-5.143-258.857 17.714-20 8-34.857 17.714-50.286 33.143s-25.143 30.286-33.143 50.286c-22.857 57.714-17.714 194.857-17.714 258.857s-5.143 201.143 17.714 258.857c8 20 17.714 34.857 33.143 50.286s30.286 25.143 50.286 33.143c57.714 22.857 194.857 17.714 258.857 17.714s201.143 5.143 258.857-17.714c20-8 34.857-17.714 50.286-33.143s25.143-30.286 33.143-50.286c22.857-57.714 17.714-194.857 17.714-258.857s5.143-201.143-17.714-258.857c-8-20-17.714-34.857-33.143-50.286s-30.286-25.143-50.286-33.143c-57.714-22.857-194.857-17.714-258.857-17.714zM877.714 512c0 60.571 0.571 120.571-2.857 181.143-3.429 70.286-19.429 132.571-70.857 184s-113.714 67.429-184 70.857c-60.571 3.429-120.571 2.857-181.143 2.857s-120.571 0.571-181.143-2.857c-70.286-3.429-132.571-19.429-184-70.857s-67.429-113.714-70.857-184c-3.429-60.571-2.857-120.571-2.857-181.143s-0.571-120.571 2.857-181.143c3.429-70.286 19.429-132.571 70.857-184s113.714-67.429 184-70.857c60.571-3.429 120.571-2.857 181.143-2.857s120.571-0.571 181.143 2.857c70.286 3.429 132.571 19.429 184 70.857s67.429 113.714 70.857 184c3.429 60.571 2.857 120.571 2.857 181.143z"></path>
+                </svg>
+              </a>
             </div>
-          </footer>
-        </footer-wrapper>
-      </div>
+          </div>
+
+          <!-- ap01lo Card -->
+          <div class="team-card">
+            <img src="images/ap01lo.png" alt="ap01lo" class="member-image" />
+            <h3 class="member-name">ap01lo</h3>
+            <p class="member-role">Member</p>
+            <p class="member-skills">Pwn, Reverse, Web</p>
+            <div class="social-links">
+              <a href="https://github.com/ap0llo19" class="social-link">
+                <svg viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" d="M12.006 2a9.847 9.847 0 0 0-6.484 2.44 10.32 10.32 0 0 0-3.393 6.17 10.48 10.48 0 0 0 1.317 6.955 10.045 10.045 0 0 0 5.4 4.418c.504.095.683-.223.683-.494 0-.245-.01-1.052-.014-1.908-2.78.62-3.366-1.21-3.366-1.21a2.711 2.711 0 0 0-1.11-1.5c-.907-.637.07-.621.07-.621.317.044.62.163.885.346.266.183.487.426.647.71.135.253.318.476.538.655a2.079 2.079 0 0 0 2.37.196c.045-.52.27-1.006.635-1.37-2.219-.259-4.554-1.138-4.554-5.07a4.022 4.022 0 0 1 1.031-2.75 3.77 3.77 0 0 1 .096-2.713s.839-.275 2.749 1.05a9.26 9.26 0 0 1 5.004 0c1.906-1.325 2.74-1.05 2.74-1.05.37.858.406 1.828.101 2.713a4.017 4.017 0 0 1 1.029 2.75c0 3.939-2.339 4.805-4.564 5.058a2.471 2.471 0 0 1 .679 1.897c0 1.372-.012 2.477-.012 2.814 0 .272.18.592.687.492a10.05 10.05 0 0 0 5.388-4.421 10.473 10.473 0 0 0 1.313-6.948 10.32 10.32 0 0 0-3.39-6.165A9.847 9.847 0 0 0 12.007 2Z" clip-rule="evenodd"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- George Card -->
+          <div class="team-card">
+            <img src="images/george.png" alt="George" class="member-image" />
+            <h3 class="member-name">George</h3>
+            <p class="member-role">Member</p>
+            <p class="member-skills">Web</p>
+            <div class="social-links">
+              <!-- No social links for George -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Hiring Section -->
+        <div class="hiring-section">
+          <h2 class="hiring-title">We are looking for new members!</h2>
+          <p class="hiring-text">
+            If you enjoy playing CTFs and want to join our team, please send an email to us including some information about you here: 
+            <a href="mailto:1c3gh3tt0@gmail.com?subject=CTF TEAM JOIN REQUEST">1c3gh3tt0@gmail.com</a>. 
+            Let's participate in various CTFs and grow our knowledge on CyberSecurity together!
+          </p>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="footer-social">
+            <a href="https://x.com/1c3Gh3tt0" class="social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="https://ctftime.org/team/299748" class="social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13.09 3.294c1.924.95 3.422 1.69 5.472.692a1 1 0 0 1 1.438.9v9.54a1 1 0 0 1-.562.9c-2.981 1.45-5.382.24-7.25-.701a38.739 38.739 0 0 0-.622-.31c-1.033-.497-1.887-.812-2.756-.77-.76.036-1.672.357-2.81 1.396V21a1 1 0 1 1-2 0V4.971a1 1 0 0 1 .297-.71c1.522-1.506 2.967-2.185 4.417-2.255 1.407-.068 2.653.453 3.72.967.225.108.443.216.655.32Z"/>
+              </svg>
+            </a>
+          </div>
+          <span class="footer-text">© 2025 1c3Gh3tt0</span>
+        </div>
+      </footer>
     </div>
-    <script
-      defer=""
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
+
+    <script>
+      // Simple scroll animation
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      }, observerOptions);
+
+      // Observe sections for animation
+      document.querySelectorAll('.team-section').forEach(section => {
+        observer.observe(section);
+      });
+
+      // Mobile menu toggle (placeholder functionality)
+      const burger = document.querySelector('.burger');
+      const navMenu = document.querySelector('.nav-menu');
+      
+      if (burger && navMenu) {
+        burger.addEventListener('click', () => {
+          navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+      }
+
+      // Add hover effects for team cards
+      const teamCards = document.querySelectorAll('.team-card');
+      teamCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'translateY(0) scale(1)';
+        });
+      });
+    </script>
   </body>
 </html>
