@@ -413,6 +413,52 @@
         transition: 0.3s;
       }
 
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(10, 10, 15, 0.98);
+        backdrop-filter: blur(20px);
+        z-index: 1001;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .mobile-menu.active {
+        display: flex;
+      }
+
+      .mobile-nav-link {
+        color: var(--primary-text);
+        text-decoration: none;
+        font-size: 1.5rem;
+        font-weight: 500;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .mobile-nav-link:hover {
+        color: var(--accent-color);
+        background: rgba(0, 212, 255, 0.1);
+      }
+
+      .close-mobile-menu {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        background: none;
+        border: none;
+        color: var(--accent-color);
+        font-size: 2rem;
+        cursor: pointer;
+      }
+
       /* Responsive design */
       @media (max-width: 768px) {
         .nav-menu {
@@ -518,13 +564,22 @@
             <li><a href="team.html" class="nav-link">Team</a></li>
           </ul>
 
-          <div class="burger">
+          <div class="burger" onclick="toggleMobileMenu()" >
             <span></span>
             <span></span>
             <span></span>
           </div>
         </div>
       </nav>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu" id="mobileMenu">
+        <button class="close-mobile-menu" onclick="toggleMobileMenu()">×</button>
+        <a href="index.html" class="mobile-nav-link">Home</a>
+        <a href="schedule.html" class="mobile-nav-link">Schedule</a>
+        <a href="writeups.html" class="mobile-nav-link">Writeups</a>
+        <a href="team.html" class="mobile-nav-link">Team</a>
+      </div>
 
       <!-- Hero Section -->
       <section class="hero-section animate-in">
@@ -596,6 +651,12 @@
     </div>
 
     <script>
+      // Mobile menu toggle
+      function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenu.classList.toggle('active');
+      }
+
       // Simple scroll animation
       const observerOptions = {
         threshold: 0.1,
