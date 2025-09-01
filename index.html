@@ -138,6 +138,11 @@
         position: relative;
       }
 
+      .nav-link.active {
+        color: var(--accent-color);
+        background: rgba(0, 212, 255, 0.1);
+      }
+
       .nav-link::before {
         content: '';
         position: absolute;
@@ -154,7 +159,8 @@
         background: rgba(0, 212, 255, 0.1);
       }
 
-      .nav-link:hover::before {
+      .nav-link:hover::before,
+      .nav-link.active::before {
         width: 100%;
       }
 
@@ -558,7 +564,7 @@
           <img src="images/iceghetto2.png" alt="1c3Gh3tt0 Logo" class="logo" />
           
           <ul class="nav-menu">
-            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="index.html" class="nav-link active">Home</a></li>
             <li><a href="schedule.html" class="nav-link">Schedule</a></li>
             <li><a href="writeups.html" class="nav-link">Writeups</a></li>
             <li><a href="team.html" class="nav-link">Team</a></li>
@@ -610,22 +616,22 @@
         <h2 class="section-title">Schedule</h2>
         
         <div class="ctf-grid">
-          <a href="https://ctftime.org/event/2835" class="ctf-card">
-            <img src="https://ctftime.org/media/cache/59/85/598565efedc7b4ff4e4772d39bf7c51a.png" alt="TJCTF 2025" class="ctf-image" />
-            <h3 class="ctf-title">BrunnerCTF 2025</h3>
-            <p class="ctf-ranking">Ranking: 63 / 1158</p>
+          <a href="https://ctftime.org/event/2799" class="ctf-card">
+            <img src="https://ctftime.org/media/cache/01/81/0181968d7d5ea0b5754c0dbae9c49b23.png" alt="CTF Image" class="ctf-image" />
+            <h3 class="ctf-title">ImaginaryCTF 2025</h3>
+            <p class="ctf-ranking">Ranking: ? / ?</p>
           </a>
 
-          <a href="https://ctftime.org/event/2784" class="ctf-card">
-            <img src="https://ctftime.org/media/cache/bc/2a/bc2abeaae7b46d99182eb255ee322405.png" alt="N0PSctf" class="ctf-image" />
-            <h3 class="ctf-title">BDSec CTF 2025</h3>
-            <p class="ctf-ranking">Ranking: 12 / 642</p>
+          <a href="https://ctftime.org/event/2684" class="ctf-card">
+            <img src="https://ctftime.org/media/cache/fd/2b/fd2b8e07c6686304970d4552df95c8dc.png" alt="CTF Image" class="ctf-image" />
+            <h3 class="ctf-title">NNS CTF 2025</h3>
+            <p class="ctf-ranking">Ranking: 46 / 398</p>
           </a>
 
-          <a href="https://ctftime.org/event/2669" class="ctf-card">
-            <img src="https://ctftime.org/media/cache/2a/92/2a922627fb21f5626d8bbd926ccdf797.png" alt="DaVinciCTF 25" class="ctf-image" />
-            <h3 class="ctf-title">DownUnderCTF 2025</h3>
-            <p class="ctf-ranking">Ranking: 248 / 1667</p>
+          <a href="https://ctftime.org/event/2864" class="ctf-card">
+            <img src="https://ctftime.org/media/cache/ce/5d/ce5d4634aaede69504dd939748cc71f5.png" alt="CTF Image" class="ctf-image" />
+            <h3 class="ctf-title">FW Engineer CTF 2025</h3>
+            <p class="ctf-ranking">Ranking: 20 / 733</p>
           </a>
         </div>
       </section>
