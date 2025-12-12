@@ -209,6 +209,47 @@
         to { text-shadow: 0 0 30px rgba(0, 212, 255, 0.8); }
       }
 
+      /* === ADDED SORTING STYLES START === */
+      .sort-controls {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+        animation: fadeInUp 0.5s ease-out forwards;
+      }
+
+      .sort-btn {
+        background: rgba(26, 26, 46, 0.6);
+        border: 1px solid var(--border-color);
+        color: var(--secondary-text);
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .sort-btn:hover {
+        border-color: var(--accent-color);
+        color: var(--primary-text);
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .sort-btn.active {
+        background: rgba(0, 212, 255, 0.15);
+        border-color: var(--accent-color);
+        color: var(--accent-color);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+      }
+      /* === ADDED SORTING STYLES END === */
+
       /* Timeline */
       .timeline {
         position: relative;
@@ -496,6 +537,18 @@
           width: 10px;
           height: 10px;
         }
+        
+        /* ADDED MOBILE SORTING STYLE */
+        .sort-controls {
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .sort-btn {
+            width: 100%;
+            justify-content: center;
+        }
       }
 
       /* Custom scrollbar */
@@ -518,7 +571,6 @@
     </style>
   </head>
   <body>
-    <!-- Animated background particles -->
     <div class="bg-particles">
       <div class="particle"></div>
       <div class="particle"></div>
@@ -529,7 +581,6 @@
     </div>
 
     <div class="main-container">
-      <!-- Navigation -->
       <nav class="navbar">
         <div class="nav-container">
           <img src="images/iceghetto2.png" alt="1c3Gh3tt0 Logo" class="logo" />
@@ -549,7 +600,6 @@
         </div>
       </nav>
 
-      <!-- Mobile Menu -->
       <div class="mobile-menu" id="mobileMenu">
         <button class="close-mobile-menu" onclick="toggleMobileMenu()">×</button>
         <a href="index.html" class="mobile-nav-link">Home</a>
@@ -558,11 +608,117 @@
         <a href="team.html" class="mobile-nav-link">Team</a>
       </div>
 
-      <!-- Schedule Section -->
       <section class="schedule-section">
         <h1 class="section-title">CTF Schedule & Results</h1>
         
+        <div class="sort-controls">
+          <button class="sort-btn active" onclick="sortTimeline('date', this)">
+            <span>📅</span>Date
+          </button>
+          <button class="sort-btn" onclick="sortTimeline('rank', this)">
+            <span>🏆</span>Rank
+          </button>
+        </div>
         <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">04/12/2025 - 14:00</div>
+              <a href="https://ctftime.org/event/3003" target="_blank" class="ctf-title">Metared Argentina 2025</a>
+              <div class="ctf-ranking">Ranking: 21 / 485 - Points: 4300</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">22/11/2025 - 20:00</div>
+              <a href="https://ctftime.org/event/2714" target="_blank" class="ctf-title">GlacierCTF 2025</a>
+              <div class="ctf-ranking">Ranking: 75 / 503 - Points: 700</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">31/10/2025 - 15:00</div>
+              <a href="https://ctftime.org/event/2920" target="_blank" class="ctf-title">V1t CTF 2025</a>
+              <div class="ctf-ranking">Ranking: 97 / 1237 - Points: 3045</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">18/10/2025 - 06:30</div>
+              <a href="https://ctftime.org/event/2938" target="_blank" class="ctf-title">H7CTF 2025</a>
+              <div class="ctf-ranking">Ranking: 90 / 453 - Points: 10250</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">16/10/2025 - 21:00</div>
+              <a href="https://ctftime.org/event/2826" target="_blank" class="ctf-title">QnQSec CTF 2025</a>
+              <div class="ctf-ranking">Ranking: 29 / 738 - Points: 4448</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">10/10/2025 - 15:30</div>
+              <a href="https://ctftime.org/event/2957" target="_blank" class="ctf-title">EnigmaXplore 3.0</a>
+              <div class="ctf-ranking">Ranking: 50 / 407 - Points: 1100</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">27/09/2025 - 17:00</div>
+              <a href="https://ctftime.org/event/2863" target="_blank" class="ctf-title">SunshineCTF 2025</a>
+              <div class="ctf-ranking">Ranking: 124 / 1376 - Points: 1532</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">19/09/2025 - 11:00</div>
+              <a href="https://ctftime.org/event/2902" target="_blank" class="ctf-title">K17 CTF</a>
+              <div class="ctf-ranking">Ranking: 45 / 972 - Points: 3068</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">14/09/2025 - 17:00</div>
+              <a href="https://ctftime.org/event/2904" target="_blank" class="ctf-title">Pointer Overflow CTF - 2025</a>
+              <div class="ctf-ranking ranking-highlight"><span class="crown">👑</span>Ranking: 1 / 637 - Points: 16000</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">13/09/2025 - 09:30</div>
+              <a href="https://ctftime.org/event/2848" target="_blank" class="ctf-title">07CTF</a>
+              <div class="ctf-ranking">Ranking: 17 / 439 - Points: 2599</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">09/09/2025 - 22:00</div>
+              <a href="https://ctftime.org/event/2854" target="_blank" class="ctf-title">WatCTF F25</a>
+              <div class="ctf-ranking">Ranking: 58 / 843 - Points: 1053</div>
+            </div>
+          </div>
+
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -934,7 +1090,6 @@
         </div>
       </section>
 
-      <!-- Footer -->
       <footer class="footer">
         <div class="footer-content">
           <div class="footer-social">
@@ -955,6 +1110,53 @@
     </div>
 
     <script>
+      // === ADDED SORTING LOGIC START ===
+      function parseDate(dateStr) {
+        // format: DD/MM/YYYY - HH:mm
+        const [datePart, timePart] = dateStr.split(' - ');
+        const [day, month, year] = datePart.split('/');
+        const [hour, minute] = timePart.split(':');
+        // Note: Month is 0-indexed in JS Date
+        return new Date(year, month - 1, day, hour, minute);
+      }
+
+      function parseRank(rankText) {
+        // Extract the first number after "Ranking:"
+        const match = rankText.match(/Ranking:\s*(\d+)/);
+        return match ? parseInt(match[1]) : 999999; // If no rank found, push to bottom
+      }
+
+      function sortTimeline(criteria, btnElement) {
+        const timeline = document.querySelector('.timeline');
+        const items = Array.from(timeline.querySelectorAll('.timeline-item'));
+
+        // Update active button state
+        document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
+        btnElement.classList.add('active');
+
+        items.sort((a, b) => {
+          if (criteria === 'date') {
+            const dateA = parseDate(a.querySelector('.timeline-date').innerText);
+            const dateB = parseDate(b.querySelector('.timeline-date').innerText);
+            return dateB - dateA; // Newest first (Descending)
+          } else {
+            const rankA = parseRank(a.querySelector('.ctf-ranking').innerText);
+            const rankB = parseRank(b.querySelector('.ctf-ranking').innerText);
+            return rankA - rankB; // Lowest number first (Ascending)
+          }
+        });
+
+        // Re-append items in new order with animation reset
+        items.forEach((item, index) => {
+          // Reset animation
+          item.style.animation = 'none';
+          item.offsetHeight; /* trigger reflow */
+          item.style.animation = `fadeInUp 0.8s ease-out forwards ${index * 0.1}s`;
+          timeline.appendChild(item);
+        });
+      }
+      // === ADDED SORTING LOGIC END ===
+
       // Mobile menu toggle
       function toggleMobileMenu() {
         const mobileMenu = document.getElementById('mobileMenu');
