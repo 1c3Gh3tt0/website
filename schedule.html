@@ -8,595 +8,177 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link
-      rel="shortcut icon"
-      href="images/iceghetto2.png"
-      type="icon/png"
-      sizes="32x32"
-    />
+    <link rel="shortcut icon" href="images/iceghetto2.png" type="icon/png" sizes="32x32" />
     <style>
       :root {
-        --primary-bg: #0a0a0f;
-        --secondary-bg: #1a1a2e;
-        --accent-bg: #16213e;
-        --card-bg: rgba(26, 26, 46, 0.8);
-        --primary-text: #ffffff;
-        --secondary-text: #a0a0b0;
-        --accent-color: #00d4ff;
-        --accent-hover: #00b8e6;
-        --success-color: #00ff88;
-        --danger-color: #ff4757;
-        --border-color: rgba(0, 212, 255, 0.2);
-        --shadow-glow: 0 0 30px rgba(0, 212, 255, 0.15);
-        --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.3);
-        --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #0066ff 100%);
-        --gradient-card: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 102, 255, 0.05) 100%);
-        --gradient-bg: radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                       radial-gradient(circle at 80% 20%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
-                       linear-gradient(180deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+        --bg-dark: #05050a;
+        --bg-panel: rgba(20, 20, 35, 0.6);
+        --text-main: #ffffff;
+        --text-muted: #94a3b8;
+        --accent-cyan: #00f2ff;
+        --glass-border: 1px solid rgba(255, 255, 255, 0.08);
       }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-        font-size: 16px;
-      }
-
+      * { margin: 0; padding: 0; box-sizing: border-box; }
       body {
-        font-family: 'Inter', sans-serif;
-        background: var(--gradient-bg);
-        color: var(--primary-text);
-        line-height: 1.6;
-        overflow-x: hidden;
-        min-height: 100vh;
+        font-family: 'Inter', sans-serif; background-color: var(--bg-dark);
+        color: var(--text-main); overflow-x: hidden; min-height: 100vh;
       }
-
-      /* Animated background particles */
-      .bg-particles {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: -1;
-        opacity: 0.3;
+      /* Reuse backgrounds */
+      .bg-grid {
+        position: fixed; top: 0; left: 0; width: 200%; height: 200%;
+        background-image: linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
+                          linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+        transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+        animation: gridMove 20s linear infinite; z-index: -2; pointer-events: none;
       }
-
+      @keyframes gridMove {
+        0% { transform: perspective(500px) rotateX(60deg) translateY(0) translateZ(-200px); }
+        100% { transform: perspective(500px) rotateX(60deg) translateY(40px) translateZ(-200px); }
+      }
+      .bg-vignette {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: radial-gradient(circle at center, transparent 0%, #05050a 90%);
+        z-index: -1; pointer-events: none;
+      }
+      .bg-particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
       .particle {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background: var(--accent-color);
-        border-radius: 50%;
-        animation: float 15s infinite ease-in-out;
+        position: absolute; width: 3px; height: 3px; background: var(--accent-cyan);
+        box-shadow: 0 0 10px var(--accent-cyan); border-radius: 50%;
+        animation: floatParticle 10s infinite linear;
+      }
+      @keyframes floatParticle {
+        0% { transform: translateY(100vh) scale(0); opacity: 0; }
+        20% { opacity: 0.8; }
+        100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
       }
 
-      .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
-      .particle:nth-child(2) { left: 20%; top: 80%; animation-delay: 2s; }
-      .particle:nth-child(3) { left: 30%; top: 40%; animation-delay: 4s; }
-      .particle:nth-child(4) { left: 70%; top: 10%; animation-delay: 6s; }
-      .particle:nth-child(5) { left: 80%; top: 70%; animation-delay: 8s; }
-      .particle:nth-child(6) { left: 90%; top: 30%; animation-delay: 10s; }
-
-      @keyframes float {
-        0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
-        25% { transform: translateY(-20px) rotate(90deg); opacity: 1; }
-        50% { transform: translateY(-40px) rotate(180deg); opacity: 0.7; }
-        75% { transform: translateY(-20px) rotate(270deg); opacity: 1; }
-      }
-
-      /* Navigation */
+      /* Nav */
       .navbar {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        background: rgba(10, 10, 15, 0.95);
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid var(--border-color);
+        position: sticky; top: 0; z-index: 1000; background: rgba(5, 5, 10, 0.7);
+        backdrop-filter: blur(15px); border-bottom: var(--glass-border);
       }
-
       .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 1rem 2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        max-width: 1200px; margin: 0 auto; padding: 1rem 2rem;
+        display: flex; justify-content: space-between; align-items: center;
       }
-
-      .logo {
-        height: 3rem;
-        filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
-        transition: all 0.3s ease;
-      }
-
-      .logo:hover {
-        filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8));
-        transform: scale(1.05);
-      }
-
-      .nav-menu {
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-        list-style: none;
-      }
-
+      .logo { height: 2.8rem; filter: drop-shadow(0 0 8px rgba(0, 242, 255, 0.4)); transition: transform 0.3s; }
+      .logo:hover { transform: scale(1.1) rotate(-2deg); }
+      .nav-menu { display: flex; gap: 2.5rem; list-style: none; }
       .nav-link {
-        color: var(--secondary-text);
-        text-decoration: none;
-        font-weight: 500;
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        position: relative;
+        color: var(--text-muted); text-decoration: none; font-family: 'JetBrains Mono', monospace;
+        font-weight: 500; font-size: 0.95rem; position: relative; padding: 0.5rem 0; transition: color 0.3s;
       }
-
-      .nav-link.active {
-        color: var(--accent-color);
-        background: rgba(0, 212, 255, 0.1);
+      .nav-link:hover, .nav-link.active { color: var(--accent-cyan); text-shadow: 0 0 10px rgba(0,242,255,0.3); }
+      .nav-link::after {
+        content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+        background: var(--accent-cyan); box-shadow: 0 0 10px var(--accent-cyan); transition: width 0.3s ease;
       }
+      .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
-      .nav-link::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: var(--gradient-primary);
-        transition: width 0.3s ease;
-      }
-
-      .nav-link.active::before,
-      .nav-link:hover::before {
-        width: 100%;
-      }
-
-      .social-icons {
-        display: flex;
-        gap: 1rem;
-      }
-
-      .social-icon {
-        color: var(--secondary-text);
-        transition: all 0.3s ease;
-        padding: 0.5rem;
-        border-radius: 8px;
-      }
-
-      .social-icon:hover {
-        color: var(--accent-color);
-        background: rgba(0, 212, 255, 0.1);
-        transform: translateY(-2px);
-      }
-
-      /* Main container */
-      .main-container {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-
-      /* Schedule Section */
-      .schedule-section {
-        padding: 4rem 2rem 6rem;
-        max-width: 1200px;
-        margin: 0 auto;
-        width: 100%;
-      }
-
+      /* Schedule */
+      .main-container { min-height: 100vh; display: flex; flex-direction: column; }
+      .schedule-section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; width: 100%; }
+      
       .section-title {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 3rem;
-        font-weight: 700;
-        margin-bottom: 3rem;
-        text-align: center;
-        background: var(--gradient-primary);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: glow 2s ease-in-out infinite alternate;
+        font-family: 'JetBrains Mono', monospace; font-size: 3rem; font-weight: 800;
+        color: white; text-align: center; margin-bottom: 3rem;
+        position: relative; display: block;
+      }
+      .section-title::before {
+        content: attr(data-text); position: absolute; left: 50%; transform: translateX(-50%);
+        text-shadow: 2px 0 var(--accent-cyan); clip: rect(0,0,0,0);
+        animation: glitch-anim 3s infinite linear alternate-reverse;
+      }
+      @keyframes glitch-anim {
+        0% { clip: rect(44px, 9999px, 56px, 0); } 100% { clip: rect(20px, 9999px, 80px, 0); }
       }
 
-      @keyframes glow {
-        from { text-shadow: 0 0 20px rgba(0, 212, 255, 0.5); }
-        to { text-shadow: 0 0 30px rgba(0, 212, 255, 0.8); }
-      }
-
-      /* === ADDED SORTING STYLES START === */
-      .sort-controls {
-        display: flex;
-        justify-content: center;
-        gap: 1.5rem;
-        margin-bottom: 3rem;
-        animation: fadeInUp 0.5s ease-out forwards;
-      }
-
+      .sort-controls { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 3rem; }
       .sort-btn {
-        background: rgba(26, 26, 46, 0.6);
-        border: 1px solid var(--border-color);
-        color: var(--secondary-text);
-        padding: 0.75rem 1.5rem;
-        border-radius: 8px;
-        cursor: pointer;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.9rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        backdrop-filter: blur(5px);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+        background: rgba(0, 242, 255, 0.05); border: 1px solid rgba(0, 242, 255, 0.2);
+        color: var(--text-muted); padding: 0.75rem 1.5rem; border-radius: 4px;
+        cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;
+        transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem;
       }
+      .sort-btn:hover { border-color: var(--accent-cyan); color: white; box-shadow: 0 0 10px rgba(0,242,255,0.2); }
+      .sort-btn.active { background: rgba(0, 242, 255, 0.15); border-color: var(--accent-cyan); color: var(--accent-cyan); box-shadow: 0 0 15px rgba(0,242,255,0.3); }
 
-      .sort-btn:hover {
-        border-color: var(--accent-color);
-        color: var(--primary-text);
-        box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
-        transform: translateY(-2px);
-      }
-
-      .sort-btn.active {
-        background: rgba(0, 212, 255, 0.15);
-        border-color: var(--accent-color);
-        color: var(--accent-color);
-        box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-      }
-      /* === ADDED SORTING STYLES END === */
-
-      /* Timeline */
-      .timeline {
-        position: relative;
-        max-width: 800px;
-        margin: 0 auto;
-      }
-
+      .timeline { position: relative; max-width: 800px; margin: 0 auto; }
       .timeline::before {
-        content: '';
-        position: absolute;
-        left: 20px;
-        top: 0;
-        height: 100%;
-        width: 2px;
-        background: var(--gradient-primary);
-        border-radius: 2px;
+        content: ''; position: absolute; left: 20px; top: 0; height: 100%; width: 2px;
+        background: linear-gradient(to bottom, var(--accent-cyan), #0066ff);
+        box-shadow: 0 0 10px var(--accent-cyan);
       }
-
-      .timeline-item {
-        position: relative;
-        margin-bottom: 3rem;
-        padding-left: 60px;
-        opacity: 0;
-        transform: translateY(30px);
-        animation: fadeInUp 0.8s ease-out forwards;
-      }
-
-      .timeline-item:nth-child(even) {
-        animation-delay: 0.1s;
-      }
-
-      .timeline-item:nth-child(odd) {
-        animation-delay: 0.2s;
-      }
-
-      @keyframes fadeInUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
+      .timeline-item { position: relative; margin-bottom: 2rem; padding-left: 60px; opacity: 0; animation: fadeInUp 0.5s ease-out forwards; }
+      
       .timeline-dot {
-        position: absolute;
-        left: -40px;
-        top: 1rem;
-        width: 16px;
-        height: 16px;
-        background: var(--accent-color);
-        border-radius: 50%;
-        border: 3px solid var(--primary-bg);
-        box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-        z-index: 10;
+        position: absolute; left: -34px; top: 1.5rem; width: 14px; height: 14px;
+        background: #000; border: 2px solid var(--accent-cyan); border-radius: 50%;
+        box-shadow: 0 0 10px var(--accent-cyan); z-index: 10;
+        margin-left: 48px; /* Alignment fix */
       }
-
       .timeline-content {
-        background: var(--card-bg);
-        backdrop-filter: blur(20px);
-        border: 1px solid var(--border-color);
-        border-radius: 16px;
-        padding: 2rem;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.3s ease;
+        background: var(--bg-panel); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px; padding: 1.5rem; transition: 0.3s;
       }
-
-      .timeline-content::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
-        transition: left 0.5s;
-      }
-
-      .timeline-content:hover::before {
-        left: 100%;
-      }
-
       .timeline-content:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-glow);
-        border-color: var(--accent-color);
+        border-color: var(--accent-cyan); transform: translateX(5px);
+        box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
       }
-
       .timeline-date {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.9rem;
-        color: var(--accent-color);
-        margin-bottom: 0.5rem;
-        font-weight: 600;
+        font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent-cyan); margin-bottom: 0.5rem;
       }
-
       .ctf-title {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-        color: var(--primary-text);
-        text-decoration: none;
-        display: inline-block;
-        transition: all 0.3s ease;
+        font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; color: white; text-decoration: none; display: block; margin-bottom: 0.5rem;
       }
-
-      .ctf-title:hover {
-        color: var(--accent-color);
-        text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-      }
-
-      .ctf-ranking {
-        color: var(--secondary-text);
-        font-size: 0.95rem;
-        margin-top: 0.5rem;
-      }
-
-      .ranking-highlight {
-        color: var(--success-color);
-        font-weight: 600;
-      }
-
-      .crown {
-        color: #ffd700;
-        margin-right: 0.25rem;
-      }
-
-      .medal-gold {
-        color: #ffd700;
-        margin-right: 0.25rem;
-      }
-
-      .medal-silver {
-        color: #c0c0c0;
-        margin-right: 0.25rem;
-      }
-
-      /* Mobile burger menu */
-      .burger {
-        display: none;
-        flex-direction: column;
-        cursor: pointer;
-        padding: 0.5rem;
-      }
-
-      .burger span {
-        width: 25px;
-        height: 3px;
-        background: var(--accent-color);
-        margin: 3px 0;
-        transition: 0.3s;
-      }
+      .ctf-title:hover { text-shadow: 0 0 8px white; }
+      .ctf-ranking { color: var(--text-muted); font-size: 0.9rem; }
+      .ranking-highlight { color: #00ff9d; font-weight: bold; text-shadow: 0 0 10px #00ff9d; }
 
       /* Footer */
-      .footer {
-        background: rgba(10, 10, 15, 0.8);
-        backdrop-filter: blur(20px);
-        border-top: 1px solid var(--border-color);
-        padding: 2rem;
-        margin-top: auto;
-      }
+      .footer { background: rgba(5, 5, 10, 0.9); border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 2rem; margin-top: auto; }
+      .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+      .footer-social { display: flex; gap: 1rem; }
+      .social-link { color: var(--text-muted); transition: 0.3s; }
+      .social-link:hover { color: var(--accent-cyan); }
+      .footer-text { color: var(--text-muted); font-size: 0.85rem; font-family: 'JetBrains Mono'; }
 
-      .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .footer-social {
-        display: flex;
-        gap: 1rem;
-      }
-
-      .footer-text {
-        color: var(--secondary-text);
-        font-size: 0.875rem;
-      }
-
+      /* Mobile */
+      .burger { display: none; flex-direction: column; cursor: pointer; padding: 0.5rem; }
+      .burger span { width: 25px; height: 2px; background: white; margin: 3px 0; }
       .mobile-menu {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background: rgba(10, 10, 15, 0.98);
-        backdrop-filter: blur(20px);
-        z-index: 1001;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 2rem;
+        position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+        background: rgba(5, 5, 10, 0.98); backdrop-filter: blur(20px); z-index: 1001;
+        display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
+        opacity: 0; pointer-events: none; transition: 0.3s;
       }
+      .mobile-menu.active { opacity: 1; pointer-events: all; }
+      .mobile-nav-link { color: white; font-family: 'JetBrains Mono'; font-size: 1.5rem; text-decoration: none; }
+      .close-mobile-menu { position: absolute; top: 2rem; right: 2rem; background: none; border: none; color: white; font-size: 2.5rem; }
 
-      .mobile-menu.active {
-        display: flex;
-      }
-
-      .mobile-nav-link {
-        color: var(--primary-text);
-        text-decoration: none;
-        font-size: 1.5rem;
-        font-weight: 500;
-        padding: 1rem 2rem;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-      }
-
-      .mobile-nav-link:hover {
-        color: var(--accent-color);
-        background: rgba(0, 212, 255, 0.1);
-      }
-
-      .close-mobile-menu {
-        position: absolute;
-        top: 2rem;
-        right: 2rem;
-        background: none;
-        border: none;
-        color: var(--accent-color);
-        font-size: 2rem;
-        cursor: pointer;
-      }
-
-      /* Responsive design */
       @media (max-width: 768px) {
-        .nav-menu {
-          display: none;
-        }
-
-        .burger {
-          display: flex;
-        }
-
-        .section-title {
-          font-size: 2.5rem;
-        }
-
-        .schedule-section {
-          padding: 2rem 1rem 4rem;
-        }
-
-        .timeline::before {
-          left: 15px;
-        }
-
-        .timeline-item {
-          padding-left: 50px;
-        }
-
-        .timeline-dot {
-          left: -35px;
-          width: 12px;
-          height: 12px;
-        }
-
-        .timeline-content {
-          padding: 1.5rem;
-        }
-
-        .footer-content {
-          flex-direction: column;
-          gap: 1rem;
-          text-align: center;
-        }
+        .nav-menu { display: none; } .burger { display: flex; }
+        .timeline::before { left: 15px; } .timeline-item { padding-left: 40px; }
+        .timeline-dot { left: -34px; margin-left: 42px; }
+        .footer-content { flex-direction: column; gap: 1rem; }
       }
-
-      @media (max-width: 480px) {
-        .section-title {
-          font-size: 2rem;
-        }
-
-        .timeline::before {
-          left: 10px;
-        }
-
-        .timeline-item {
-          padding-left: 35px;
-        }
-
-        .timeline-dot {
-          left: -30px;
-          width: 10px;
-          height: 10px;
-        }
-        
-        /* ADDED MOBILE SORTING STYLE */
-        .sort-controls {
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .sort-btn {
-            width: 100%;
-            justify-content: center;
-        }
-      }
-
-      /* Custom scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: var(--primary-bg);
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: var(--gradient-primary);
-        border-radius: 4px;
-      }
-
-      ::-webkit-scrollbar-thumb:hover {
-        background: var(--accent-hover);
-      }
+      @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
     </style>
   </head>
   <body>
-    <div class="bg-particles">
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-    </div>
-
+    <div class="bg-grid"></div><div class="bg-vignette"></div><div class="bg-particles" id="particles"></div>
     <div class="main-container">
       <nav class="navbar">
         <div class="nav-container">
           <img src="images/iceghetto2.png" alt="1c3Gh3tt0 Logo" class="logo" />
-          
           <ul class="nav-menu">
             <li><a href="index.html" class="nav-link">Home</a></li>
             <li><a href="schedule.html" class="nav-link active">Schedule</a></li>
             <li><a href="writeups.html" class="nav-link">Writeups</a></li>
             <li><a href="team.html" class="nav-link">Team</a></li>
           </ul>
-
-          <div class="burger" onclick="toggleMobileMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+          <div class="burger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></div>
         </div>
       </nav>
 
@@ -609,16 +191,13 @@
       </div>
 
       <section class="schedule-section">
-        <h1 class="section-title">CTF Schedule & Results</h1>
+        <h1 class="section-title" data-text="Schedule & Results">Schedule & Results</h1>
         
         <div class="sort-controls">
-          <button class="sort-btn active" onclick="sortTimeline('date', this)">
-            <span>📅</span>Date
-          </button>
-          <button class="sort-btn" onclick="sortTimeline('rank', this)">
-            <span>🏆</span>Rank
-          </button>
+          <button class="sort-btn active" onclick="sortTimeline('date', this)"><span>📅</span>Date</button>
+          <button class="sort-btn" onclick="sortTimeline('rank', this)"><span>🏆</span>Rank</button>
         </div>
+
         <div class="timeline">
           <div class="timeline-item">
             <div class="timeline-dot"></div>
@@ -628,7 +207,6 @@
               <div class="ctf-ranking">Ranking: 21 / 485 - Points: 4300</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -637,7 +215,6 @@
               <div class="ctf-ranking">Ranking: 75 / 503 - Points: 700</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -646,7 +223,6 @@
               <div class="ctf-ranking">Ranking: 97 / 1237 - Points: 3045</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -655,7 +231,6 @@
               <div class="ctf-ranking">Ranking: 90 / 453 - Points: 10250</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -664,7 +239,6 @@
               <div class="ctf-ranking">Ranking: 29 / 738 - Points: 4448</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -673,7 +247,6 @@
               <div class="ctf-ranking">Ranking: 50 / 407 - Points: 1100</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -682,7 +255,6 @@
               <div class="ctf-ranking">Ranking: 124 / 1376 - Points: 1532</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -691,7 +263,6 @@
               <div class="ctf-ranking">Ranking: 45 / 972 - Points: 3068</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -700,7 +271,6 @@
               <div class="ctf-ranking ranking-highlight"><span class="crown">👑</span>Ranking: 1 / 637 - Points: 16000</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -709,7 +279,6 @@
               <div class="ctf-ranking">Ranking: 17 / 439 - Points: 2599</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -718,7 +287,6 @@
               <div class="ctf-ranking">Ranking: 58 / 843 - Points: 1053</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -727,7 +295,6 @@
               <div class="ctf-ranking">Ranking: 78 / 1414 - Points: 2700</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -736,7 +303,6 @@
               <div class="ctf-ranking">Ranking: 46 / 398 - Points: 2160</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -745,7 +311,6 @@
               <div class="ctf-ranking">Ranking: 20 / 733 - Points: 4620</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -754,7 +319,6 @@
               <div class="ctf-ranking">Ranking: 63 / 1158 - Points: 4426</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -763,7 +327,6 @@
               <div class="ctf-ranking">Ranking: 12 / 642 - Points: 3995</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -772,7 +335,6 @@
               <div class="ctf-ranking">Ranking: 248 / 1667 - Points: 1761</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -781,7 +343,6 @@
               <div class="ctf-ranking">Ranking: 113 / 723 - Points: 5396</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -790,7 +351,6 @@
               <div class="ctf-ranking">Ranking: 62 / 1234 - Points: 1878</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -799,7 +359,6 @@
               <div class="ctf-ranking">Ranking: 43 / 276 - Points: 1872</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -808,7 +367,6 @@
               <div class="ctf-ranking">Ranking: 52 / 950 - Points: 21493</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -817,7 +375,6 @@
               <div class="ctf-ranking">Ranking: 11 / 85 - Points: 590</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -826,7 +383,6 @@
               <div class="ctf-ranking">Ranking: 88 / 467 - Points: 900</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -835,7 +391,6 @@
               <div class="ctf-ranking">Ranking: 66 / 611 - Points: 2965</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -844,7 +399,6 @@
               <div class="ctf-ranking">Ranking: 23 / 407 - Points: 17481</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -853,7 +407,6 @@
               <div class="ctf-ranking ranking-highlight"><span class="crown">👑</span>Ranking: 1 / 99 - Points: 6421</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -862,7 +415,6 @@
               <div class="ctf-ranking">Ranking: 66 / 751 - Points: 2431</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -871,7 +423,6 @@
               <div class="ctf-ranking">Ranking: 9 / 84 - Points: 885</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -880,16 +431,14 @@
               <div class="ctf-ranking">Ranking: 21 / 207 - Points: 1254</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
               <div class="timeline-date">27/02/2025 - 08:30</div>
               <a href="https://ctftime.org/event/2619" target="_blank" class="ctf-title">ACECTF 1.0</a>
-              <div class="ctf-ranking ranking-highlight"><span class="medal-silver">🥈</span>Ranking: 2 / 661 - Points: 9200</div>
+              <div class="ctf-ranking ranking-highlight"><span class="crown">🥈</span>Ranking: 2 / 661 - Points: 9200</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -898,7 +447,6 @@
               <div class="ctf-ranking">Ranking: 4 / 753 - Points: 8910</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -907,7 +455,6 @@
               <div class="ctf-ranking">Ranking: 13 / 806 - Points: 8910</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -916,7 +463,6 @@
               <div class="ctf-ranking">Ranking: 91 / 933 - Points: 5415</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -925,7 +471,6 @@
               <div class="ctf-ranking">Ranking: 75 / 848 - Points: 1629</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -934,7 +479,6 @@
               <div class="ctf-ranking">Ranking: 105 / 1115 - Points: 651</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -943,7 +487,6 @@
               <div class="ctf-ranking ranking-highlight"><span class="crown">👑</span>Ranking: 1 / 383 - Points: 10610</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -952,7 +495,6 @@
               <div class="ctf-ranking">Ranking: 57 / 150 - Points: 1817</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -961,7 +503,6 @@
               <div class="ctf-ranking">Ranking: 89 / 759 - Points: 2410</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -970,7 +511,6 @@
               <div class="ctf-ranking">Ranking: 82 / 848 - Points: 370</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -979,7 +519,6 @@
               <div class="ctf-ranking">Ranking: 22 / 658 - Points: 10652</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -988,7 +527,6 @@
               <div class="ctf-ranking">Ranking: 26 / 190 - Points: 1034</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -997,7 +535,6 @@
               <div class="ctf-ranking">Ranking: 28 / 336 - Points: 1865</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -1006,7 +543,6 @@
               <div class="ctf-ranking">Ranking: 9 / 458 - Points: 11631</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -1015,7 +551,6 @@
               <div class="ctf-ranking">Ranking: 7 / 205 - Points: 6270</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -1024,7 +559,6 @@
               <div class="ctf-ranking">Ranking: 38 / 797 - Points: 5968</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -1033,7 +567,6 @@
               <div class="ctf-ranking">Ranking: 50 / 831 - Points: 6419</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -1042,7 +575,6 @@
               <div class="ctf-ranking">Ranking: 12 / 459 - Points: 2665 (Full Clear)</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -1051,7 +583,6 @@
               <div class="ctf-ranking">Ranking: 39 / 1215 - Points: 5423</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -1060,16 +591,14 @@
               <div class="ctf-ranking">Ranking: 14 / 203 - Points: 2016</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
               <div class="timeline-date">11/10/2024 - 15:00</div>
-              <a href="https://ctftime.org/event/2256" target="_blank" class="ctf-title">TCP1P CTF 2024: Exploring Nusantara's Digital Realm</a>
+              <a href="https://ctftime.org/event/2256" target="_blank" class="ctf-title">TCP1P CTF 2024</a>
               <div class="ctf-ranking">Ranking: 100 / 396 - Points: 100 (1000*)</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -1078,31 +607,23 @@
               <div class="ctf-ranking">Ranking: 166 / 1033 - Points: 1699</div>
             </div>
           </div>
-
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
               <div class="timeline-date">27/09/2024 - 13:00</div>
-              <a href="https://ctftime.org/event/2480" target="_blank" class="ctf-title">DefCamp Capture the Flag (D-CTF) 2024 Quals</a>
+              <a href="https://ctftime.org/event/2480" target="_blank" class="ctf-title">DefCamp Capture the Flag 2024 Quals</a>
               <div class="ctf-ranking">Ranking: 152 / 459 - Points: 302</div>
             </div>
           </div>
+
         </div>
       </section>
 
       <footer class="footer">
         <div class="footer-content">
           <div class="footer-social">
-            <a href="https://x.com/1c3Gh3tt0" class="social-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-            <a href="https://ctftime.org/team/299748" class="social-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M13.09 3.294c1.924.95 3.422 1.69 5.472.692a1 1 0 0 1 1.438.9v9.54a1 1 0 0 1-.562.9c-2.981 1.45-5.382.24-7.25-.701a38.739 38.739 0 0 0-.622-.31c-1.033-.497-1.887-.812-2.756-.77-.76.036-1.672.357-2.810 1.396V21a1 1 0 1 1-2 0V4.971a1 1 0 0 1 .297-.71c1.522-1.506 2.967-2.185 4.417-2.255 1.407-.068 2.653.453 3.72.967.225.108.443.216.655.32Z"/>
-              </svg>
-            </a>
+            <a href="https://x.com/1c3Gh3tt0" class="social-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://ctftime.org/team/299748" class="social-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.09 3.294c1.924.95 3.422 1.69 5.472.692a1 1 0 0 1 1.438.9v9.54a1 1 0 0 1-.562.9c-2.981 1.45-5.382.24-7.25-.701a38.739 38.739 0 0 0-.622-.31c-1.033-.497-1.887-.812-2.756-.77-.76.036-1.672.357-2.81 1.396V21a1 1 0 1 1-2 0V4.971a1 1 0 0 1 .297-.71c1.522-1.506 2.967-2.185 4.417-2.255 1.407-.068 2.653.453 3.72.967.225.108.443.216.655.32Z"/></svg></a>
           </div>
           <span class="footer-text">© 2025 1c3Gh3tt0</span>
         </div>
@@ -1110,86 +631,47 @@
     </div>
 
     <script>
-      // === ADDED SORTING LOGIC START ===
       function parseDate(dateStr) {
-        // format: DD/MM/YYYY - HH:mm
         const [datePart, timePart] = dateStr.split(' - ');
         const [day, month, year] = datePart.split('/');
-        const [hour, minute] = timePart.split(':');
-        // Note: Month is 0-indexed in JS Date
+        const [hour, minute] = timePart ? timePart.split(':') : [0,0];
         return new Date(year, month - 1, day, hour, minute);
       }
-
       function parseRank(rankText) {
-        // Extract the first number after "Ranking:"
         const match = rankText.match(/Ranking:\s*(\d+)/);
-        return match ? parseInt(match[1]) : 999999; // If no rank found, push to bottom
+        return match ? parseInt(match[1]) : 999999;
       }
-
       function sortTimeline(criteria, btnElement) {
         const timeline = document.querySelector('.timeline');
         const items = Array.from(timeline.querySelectorAll('.timeline-item'));
-
-        // Update active button state
         document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
         btnElement.classList.add('active');
-
         items.sort((a, b) => {
           if (criteria === 'date') {
-            const dateA = parseDate(a.querySelector('.timeline-date').innerText);
-            const dateB = parseDate(b.querySelector('.timeline-date').innerText);
-            return dateB - dateA; // Newest first (Descending)
+            return parseDate(b.querySelector('.timeline-date').innerText) - parseDate(a.querySelector('.timeline-date').innerText);
           } else {
-            const rankA = parseRank(a.querySelector('.ctf-ranking').innerText);
-            const rankB = parseRank(b.querySelector('.ctf-ranking').innerText);
-            return rankA - rankB; // Lowest number first (Ascending)
+            return parseRank(a.querySelector('.ctf-ranking').innerText) - parseRank(b.querySelector('.ctf-ranking').innerText);
           }
         });
-
-        // Re-append items in new order with animation reset
         items.forEach((item, index) => {
-          // Reset animation
           item.style.animation = 'none';
-          item.offsetHeight; /* trigger reflow */
-          item.style.animation = `fadeInUp 0.8s ease-out forwards ${index * 0.1}s`;
+          item.offsetHeight;
+          item.style.animation = `fadeInUp 0.8s ease-out forwards ${index * 0.05}s`; // Faster stagger for long list
           timeline.appendChild(item);
         });
       }
-      // === ADDED SORTING LOGIC END ===
-
-      // Mobile menu toggle
       function toggleMobileMenu() {
-        const mobileMenu = document.getElementById('mobileMenu');
-        mobileMenu.classList.toggle('active');
+        const mm = document.getElementById('mobileMenu');
+        mm.classList.toggle('active');
+        document.body.style.overflow = mm.classList.contains('active') ? 'hidden' : 'auto';
       }
       
-      // Simple scroll animation for timeline items
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.animationPlayState = 'running';
-          }
-        });
-      }, observerOptions);
-
-      // Observe timeline items for animation
-      document.querySelectorAll('.timeline-item').forEach(item => {
-        observer.observe(item);
-      });
-
-      // Mobile menu toggle
-      const burger = document.querySelector('.burger');
-      const navMenu = document.querySelector('.nav-menu');
-      
-      if (burger && navMenu) {
-        burger.addEventListener('click', () => {
-          navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-        });
+      const pCont = document.getElementById('particles');
+      for(let i=0; i<15; i++) {
+        const p = document.createElement('div'); p.className = 'particle';
+        p.style.left = Math.random()*100+'%'; p.style.animationDelay = Math.random()*5+'s';
+        p.style.animationDuration = (8+Math.random()*10)+'s';
+        pCont.appendChild(p);
       }
     </script>
   </body>
